@@ -1,3 +1,7 @@
-import GoogleApi from './google_api'
+import '../styles/results.css'
+import Search from './search'
 
-GoogleApi.hello()
+const search = new Search()
+search.initialize()
+
+

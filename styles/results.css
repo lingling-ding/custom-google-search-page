@@ -1,0 +1,121 @@
+a {
+    text-decoration: none;
+    color: blue;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+.background {
+    box-shadow: 20% 20% 50px 20% rgb(144, 144, 240) inset;
+}
+
+.search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    
+}
+
+.search>.search-bar {
+    width: 50% ;
+    height: 40px;
+    margin: 20px;
+    padding: 0px 10px;
+    font-size: large;
+}
+
+.search>.submit-button {
+    width: 80px;
+    height: 40px;
+    font-size: large;
+}
+
+.results {
+    display: none;
+}
+
+.results>.results-frame {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    width: 50%;
+    height: inherit;
+    padding: 25px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.results > .results-frame > h1 {
+    text-align: center;
+    color: rgba(0, 0, 0, 0.23);
+    margin-bottom: 20px;
+}
+
+.results>.results-frame>.results-images {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.results>.results-frame>.results-images>div {
+    border: 1px solid #cccccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex: 1 1 30%;
+    margin: 5px;
+    transition: .3s;
+}
+
+.results>.results-frame>.results-images>div:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 8px 12px 0 rgba(0, 0, 0, 0.19);
+}
+
+.results>.results-frame>.results-images>div>a>img {
+    width: 100%;
+}
+
+.results>.results-frame>.results-web>div>div {
+    padding: 10px 0;
+    text-align: justify;
+}
+
+.results>.results-frame>.pages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.no-results {
+    display: none;
+    text-align: center;
+}
+
+.results>.results-frame>.pages .page-number {
+    color: blue;
+    width: 40px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.results>.results-frame>.pages .page-number:hover {
+    text-decoration: underline;
+}
+
+.results>.results-frame>.pages>table .page-active {
+    color: black;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 700px) {
+    .results {
+        flex-direction: column;
+    }
+    .results>.results-frame {
+        width: 90%;
+        margin: 20px auto;
+    }
+}

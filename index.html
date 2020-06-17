@@ -1,12 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="src/index.js"></script>
+    <link type="text/css" rel="stylesheet" href="./styles/results.css">
 </head>
+
 <body>
-    
+    <div class="background">
+        <div class="search">
+            <input type="text" id="search-bar" class="search-bar" placeholder="Search...">
+            <input type="button" value="Search" id="submit-button" class="submit-button">
+        </div>
+
+        <div class="no-results" id="no-results">
+            <h2>Sorry nothing has been found. </h2>
+        </div>
+
+        <div class="results" id="results">
+            <div class="results-frame results-left">
+                <h1>Image Results</h1>
+                <div class='results-images' id="image-results"></div>
+            </div>
+            <div class="results-frame results-right">
+                <h1>Web Results</h1>
+                <div class="results-web" id="web-results"></div>
+                <div class="pages">
+                    <table id="page-results">
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
