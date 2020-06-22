@@ -2,21 +2,45 @@
 export default class Render {
     constructor(search) {
         this.search = search
-        this.maxPage = search.maxPage
+        // this.maxPage = search.maxPage
         this.page = search.page
         this.results = search.results
+        this.startIndex = search.startIndex
     }
 
     isPageActive(pageNumber) {
         return this.page == pageNumber
     }
+
+    // click event on the page number
+    addEventListenerToPageList() {
+        const self = this
+        const nextPage = document.getElementById('nextPage')
+        const previousPage = document.getElementById('previousPage')
+        nextPage.addEventListener('click', function(){
+            self.search.nextPage()
+        })
+        previousPage.addEventListener('click', function(){
+            self.search.previousPage()
+        })
+
+
+    //     const self = this;
+    //     for (let index = 0; index < pages.length; index++) {
+    //         const page = pages[index]
+    //         page.addEventListener('click', function () {
+    //             self.search.changePage(this.getAttribute('data-id'))
+    //         })
+
+    //     }
+    }
+
     // render the page count
     renderPageNavigation() {
         let pageNavigation = '<tr>';
-        for (let page = 1; page <= this.maxPage; page++) {
-            pageNavigation += `
-            <td class='page-number ${this.isPageActive(page) ? 'page-active' : ''}' data-id="${page}">${page}</td>`
-        }
+        pageNavigation += '<td><button id="previousPage">previous page</button></td>'
+        pageNavigation += `<td>${this.page}</td>`
+        pageNavigation += '<td><button id="nextPage">next page</button></td>'
         pageNavigation += '</tr>'
 
         document.getElementById('page-results').innerHTML = pageNavigation
@@ -27,7 +51,11 @@ export default class Render {
         for (let index = 0; index < this.results.length; index++) {
             const result = this.results[index];
             if (result['pagemap'] && result['pagemap']['cse_thumbnail'] && result['pagemap']['cse_thumbnail'][0]) {
-                renderImgResults += `<div><a href=${result['pagemap']['cse_image'][0]['src']}><img src=${result['pagemap']['cse_thumbnail'][0]['src']} /></a></div>`
+                renderImgResults += `<div>
+                <a href=${result['pagemap']['cse_image'][0]['src']}>
+                <img src=${result['pagemap']['cse_thumbnail'][0]['src']} />
+                </a>
+                </div>`
             }
         }
         document.getElementById('image-results').innerHTML = renderImgResults
@@ -36,7 +64,7 @@ export default class Render {
     renderWebResults() {
         let webResults = ''
         console.log(this.results)
-        for (let index = (this.page - 1) * 4; index < this.page * 4; index++) {
+        for (let index = 0; index < this.results.length; index++) {
             const result = this.results[index]
             if (result) {
                 webResults += `<div>
@@ -57,18 +85,7 @@ export default class Render {
             document.getElementById('no-results').style.display = 'block'
         }
     }
-    // click event on the page number
-    addEventListenerToPageList() {
-        const pages = document.getElementsByClassName('page-number')
-        const self = this;
-        for (let index = 0; index < pages.length; index++) {
-            const page = pages[index]
-            page.addEventListener('click', function () {
-                self.search.changePage(this.getAttribute('data-id'))
-            })
-
-        }
-    }
+    
     
     renderResults() {
         this.renderWebResults()

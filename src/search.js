@@ -7,13 +7,36 @@ export default class Search {
         this.google_api = new GoogleApi()
         this.results = []
         this.page = 1;
-        this.maxPage = 1;
+        this.startIndex = 1;
+        // this.maxPage = 1;
     }
 
-    changePage(pageNumber) {
-        this.page = pageNumber;
-        const render = new Render(this)
-        render.renderResults()
+    // changePage(pageNumber) {
+    //     this.page = pageNumber;
+    //     const render = new Render(this)
+    //     render.renderResults()
+    // }
+
+    makeRequest() {
+        this.google_api.getData(this.page).then(data => {
+            if (data['searchInformation']['totalResults'] > 0) {
+                this.results = data['items']
+            } else {
+                this.results = []
+            }
+            const render = new Render(this)
+            render.renderResults()
+        })
+    }
+
+    nextPage() {
+        this.page += 1
+        this.makeRequest()
+    }
+
+    previousPage() {
+        this.page -= 1
+        this.makeRequest()
     }
 
     initialize() {
@@ -22,18 +45,7 @@ export default class Search {
         submitButton.addEventListener('click', function () {
             self.google_api.query = document.getElementById('search-bar').value
             // resolving promise
-            self.google_api.getData().then(data => {
-                if (data['searchInformation']['totalResults'] > 0) {
-                    self.results = data['items']
-                } else {
-                    // no result
-                    self.results = []
-                }
-
-                // calatulate the count of pages
-                self.maxPage = Math.floor(self.results.length / 4) + 1
-                self.changePage(1)
-            })
+            self.makeRequest()
         })
     }
 }
