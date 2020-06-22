@@ -10,14 +10,24 @@
 </head>
 
 <body>
-    <div class="background">
+    <div class="overlay" id="overlay">
+        <img class="spinner" src="loading.gif">
+    </div>
+    <div id="content" class="background" style="display: none">
         <div class="search">
             <input type="text" id="search-bar" class="search-bar" placeholder="Search...">
             <input type="button" value="Search" id="submit-button" class="submit-button">
         </div>
 
+        <div class="loading" id="loading">
+            <img class="spinner" src="loading.gif">
+        </div>
+
         <div class="no-results" id="no-results">
             <h2>Sorry nothing has been found. </h2>
+        </div>
+
+        <div class="error" id="error">
         </div>
 
         <div class="results" id="results">

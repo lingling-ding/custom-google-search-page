@@ -89,7 +89,7 @@ a {
     align-items: center;
 }
 
-.no-results {
+.no-results, .error {
     display: none;
     text-align: center;
 }
@@ -121,4 +121,34 @@ a {
         width: 90%;
         margin: 20px auto;
     }
+}
+
+.loading {
+    display: none;
+    justify-content: center;
+}
+
+.loading > .spinner {
+    height: 100px;
+    width: auto;
+}
+
+.error > h2 {
+    color: red;
+}
+
+.overlay {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+.overlay > .spinner {
+    height: 200px;
+    width: auto;
 }

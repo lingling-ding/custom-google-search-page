@@ -44,7 +44,7 @@ export default class Render {
 
     // render the page count
     renderPageNavigation() {
-        let pageNavigation = '<tr>';
+        let pageNavigation = '<tr>'
         if(this.previousPageInfo) {
             pageNavigation += '<td><button id="previousPage">&lt previous</button></td>'
         }
@@ -59,13 +59,13 @@ export default class Render {
 
     // render images on the left side
     renderImageResults() {
-        let renderImgResults = '';
+        let renderImgResults = ''
         for (let index = 0; index < this.results.length; index++) {
             const result = this.results[index];
-            if (result['pagemap'] && result['pagemap']['cse_thumbnail'] && result['pagemap']['cse_thumbnail'][0]) {
+            if (result.pagemap && result.pagemap.cse_thumbnail && result.pagemap.cse_thumbnail[0]) {
                 renderImgResults += `<div>
-                <a href=${result['pagemap']['cse_image'][0]['src']}>
-                <img src=${result['pagemap']['cse_thumbnail'][0]['src']} />
+                <a href=${result.pagemap.cse_image[0].src}>
+                <img src=${result.pagemap.cse_thumbnail[0].src} />
                 </a>
                 </div>`
             }
@@ -89,8 +89,8 @@ export default class Render {
             const result = this.results[index]
             if (result) {
                 webResults += `<div>
-                <div><a href=${result['link']}>${result['title']}</a> 
-                <p> ${result['snippet']}</p></div>
+                <div><a href=${result.link}>${result.title}</a> 
+                <p> ${result.snippet}</p></div>
             </div>`
             }
         }
