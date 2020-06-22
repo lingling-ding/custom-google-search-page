@@ -47,8 +47,9 @@ export default class Search {
 
     initialize() {
         const submitButton = document.getElementById('submit-button')
-        const self = this  //save "this" in to a variable
-        submitButton.addEventListener('click', function () {
+        // save "this" in to a variable
+        const self = this  
+        submitButton.addEventListener('click', () => {
             self.google_api.query = encodeURIComponent(document.getElementById('search-bar').value)
             self.page = 1
             self.makeRequest()

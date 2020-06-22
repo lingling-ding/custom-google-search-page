@@ -26,14 +26,14 @@ export default class Render {
         const self = this
         const nextPage = document.getElementById('nextPage')
         const previousPage = document.getElementById('previousPage')
-        
-        if(nextPage){
-            nextPage.addEventListener('click', function(){
+
+        if (nextPage) {
+            nextPage.addEventListener('click', () => {
                 self.search.nextPage()
             })
         }
-        if(previousPage){
-            previousPage.addEventListener('click', function(){
+        if (previousPage) {
+            previousPage.addEventListener('click', () => {
                 self.search.previousPage()
             })
         }
@@ -42,11 +42,11 @@ export default class Render {
     // render the page count
     renderPageNavigation() {
         let pageNavigation = '<tr>'
-        if(this.previousPageInfo) {
+        if (this.previousPageInfo) {
             pageNavigation += '<td><button id="previousPage">&lt previous</button></td>'
         }
         pageNavigation += `<td class="currentPage">${this.page}</td>`
-        if(this.nextPageInfo){
+        if (this.nextPageInfo) {
             pageNavigation += '<td><button id="nextPage">next &gt</button></td>'
         }
         pageNavigation += '</tr>'
@@ -105,7 +105,7 @@ export default class Render {
         }
         document.getElementById('error').style.display = 'none'
     }
-     
+
     renderResults() {
         this.renderWebResults()
         this.renderImageResults()

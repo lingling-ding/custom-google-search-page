@@ -2,7 +2,6 @@ const API_KEY = 'AIzaSyBHtunlBtVyP-Kl9a_4kKUMlA1xLe8P_G8'
 const ENDPOINT = 'https://www.googleapis.com/customsearch/v1'
 const SEARCH_ENGINE_ID = '012989571078063497199:vtaqe4t4loc'
 
-
 // get data from google search API
 export default class GoogleApi {
     constructor() {
@@ -18,7 +17,7 @@ export default class GoogleApi {
         // have to save "this" in to a variable beacause this not accessible within the call
         const self = this;
         // ajax
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject) => {
             if (window.XMLHttpRequest) {
                 var xmlHttp = new XMLHttpRequest()
             } else {
@@ -26,7 +25,7 @@ export default class GoogleApi {
                 var xmlHttp = new ActiveXObject("Microsoft.XMLHTTP")
             }
 
-            xmlHttp.onreadystatechange = function () {
+            xmlHttp.onreadystatechange = () => {
                 if (xmlHttp.readyState == XMLHttpRequest.DONE) {
                     if (xmlHttp.status == 200) {
                         const json = JSON.parse(xmlHttp.responseText)
@@ -40,7 +39,7 @@ export default class GoogleApi {
                 }
             }
             // request couldn't be made at all
-            xmlHttp.onerror = function() { 
+            xmlHttp.onerror = () => { 
                 reject(xmlHttp)
             }
 
