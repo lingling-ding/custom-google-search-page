@@ -15,6 +15,7 @@ export default class Search {
     makeRequest() {
         Render.showSpinner();
         this.google_api.getData(this.page).then(data => {
+            // success
             if (data.searchInformation.totalResults > 0) {
                 this.results = data.items
                 this.nextPageInfo = data.queries.nextPage
@@ -28,6 +29,7 @@ export default class Search {
             const render = new Render(this)
             render.renderResults()
         }, error => {
+            // error
             Render.hideSpinner()
             Render.renderError(error)
         })
@@ -48,7 +50,6 @@ export default class Search {
         const self = this  //save "this" in to a variable
         submitButton.addEventListener('click', function () {
             self.google_api.query = encodeURIComponent(document.getElementById('search-bar').value)
-            // resolving promise
             self.page = 1
             self.makeRequest()
         })

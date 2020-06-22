@@ -11,17 +11,14 @@ export default class Render {
         this.previousPageInfo = search.previousPageInfo
     }
 
-    isPageActive(pageNumber) {
-        return this.page == pageNumber
-    }
-
-    static renderError(xmlhttp) {
+    // displaying the xmlHttp error in html
+    static renderError(xmlHttp) {
         document.getElementById('results').style.display = 'none'
         document.getElementById('no-results').style.display = 'none'
-        const error_message = new ErrorMessage(xmlhttp)
+        const errorMessage = new ErrorMessage(xmlHttp)
         const error = document.getElementById('error')
         error.style.display = 'block'
-        error.innerHTML = `<h2> ${error_message.message()} </h2>`
+        error.innerHTML = `<h2> ${errorMessage.message()} </h2>`
     }
 
     // click event on the page number

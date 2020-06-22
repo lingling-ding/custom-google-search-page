@@ -1,6 +1,7 @@
+// helper for displaying error messages in Render
 export default class ErrorMessage {
-    constructor(xmlhttp) {
-        this.request = xmlhttp
+    constructor(xmlHttp) {
+        this.request = xmlHttp
     }
 
     message() {

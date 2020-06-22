@@ -20,31 +20,32 @@ export default class GoogleApi {
         // ajax
         return new Promise(function (resolve, reject) {
             if (window.XMLHttpRequest) {
-                var xmlhttp = new XMLHttpRequest()
+                var xmlHttp = new XMLHttpRequest()
             } else {
                 // for old version of browsers
-                var xmlhttp = new ActiveXObject("Microsoft.XMLHTTP")
+                var xmlHttp = new ActiveXObject("Microsoft.XMLHTTP")
             }
 
-            xmlhttp.onreadystatechange = function () {
-                if (xmlhttp.readyState == XMLHttpRequest.DONE) {
-                    if (xmlhttp.status == 200) {
-                        const json = JSON.parse(xmlhttp.responseText)
+            xmlHttp.onreadystatechange = function () {
+                if (xmlHttp.readyState == XMLHttpRequest.DONE) {
+                    if (xmlHttp.status == 200) {
+                        const json = JSON.parse(xmlHttp.responseText)
                         // json from google search
                         resolve(json)
                     }
                     else {
-                        reject(xmlhttp)
+                        // server error
+                        reject(xmlHttp)
                     }
                 }
             }
             // request couldn't be made at all
-            xmlhttp.onerror = function() { 
-                reject(xmlhttp)
+            xmlHttp.onerror = function() { 
+                reject(xmlHttp)
             }
 
-            xmlhttp.open("GET", self.searchUrl(pageNumber), true)
-            xmlhttp.send()
+            xmlHttp.open("GET", self.searchUrl(pageNumber), true)
+            xmlHttp.send()
         })
     }
 }
