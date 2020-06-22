@@ -2,10 +2,11 @@
 export default class Render {
     constructor(search) {
         this.search = search
-        // this.maxPage = search.maxPage
         this.page = search.page
         this.results = search.results
         this.startIndex = search.startIndex
+        this.nextPageInfo = search.nextPageInfo
+        this.previousPageInfo = search.previousPageInfo
     }
 
     isPageActive(pageNumber) {
@@ -17,34 +18,34 @@ export default class Render {
         const self = this
         const nextPage = document.getElementById('nextPage')
         const previousPage = document.getElementById('previousPage')
-        nextPage.addEventListener('click', function(){
-            self.search.nextPage()
-        })
-        previousPage.addEventListener('click', function(){
-            self.search.previousPage()
-        })
-
-
-    //     const self = this;
-    //     for (let index = 0; index < pages.length; index++) {
-    //         const page = pages[index]
-    //         page.addEventListener('click', function () {
-    //             self.search.changePage(this.getAttribute('data-id'))
-    //         })
-
-    //     }
+        
+        if(nextPage){
+            nextPage.addEventListener('click', function(){
+                self.search.nextPage()
+            })
+        }
+        if(previousPage){
+            previousPage.addEventListener('click', function(){
+                self.search.previousPage()
+            })
+        }
     }
 
     // render the page count
     renderPageNavigation() {
         let pageNavigation = '<tr>';
-        pageNavigation += '<td><button id="previousPage">previous page</button></td>'
-        pageNavigation += `<td>${this.page}</td>`
-        pageNavigation += '<td><button id="nextPage">next page</button></td>'
+        if(this.previousPageInfo) {
+            pageNavigation += '<td><button id="previousPage">&lt previous</button></td>'
+        }
+        pageNavigation += `<td class="currentPage">${this.page}</td>`
+        if(this.nextPageInfo){
+            pageNavigation += '<td><button id="nextPage">next &gt</button></td>'
+        }
         pageNavigation += '</tr>'
 
         document.getElementById('page-results').innerHTML = pageNavigation
     }
+
     // render images on the left side
     renderImageResults() {
         let renderImgResults = '';
@@ -60,6 +61,7 @@ export default class Render {
         }
         document.getElementById('image-results').innerHTML = renderImgResults
     }
+
     // render the text on the right side
     renderWebResults() {
         let webResults = ''
@@ -75,6 +77,7 @@ export default class Render {
         }
         document.getElementById('web-results').innerHTML = webResults
     }
+
     // showing and hiding results by coditions
     displayResults() {
         if (this.results.length > 0) {
@@ -85,8 +88,7 @@ export default class Render {
             document.getElementById('no-results').style.display = 'block'
         }
     }
-    
-    
+     
     renderResults() {
         this.renderWebResults()
         this.renderImageResults()

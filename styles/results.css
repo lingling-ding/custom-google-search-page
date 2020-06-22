@@ -65,7 +65,7 @@ a {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    flex: 1 1 30%;
+    flex: 1 1 45%;
     margin: 5px;
     transition: .3s;
 }
@@ -94,19 +94,22 @@ a {
     text-align: center;
 }
 
-.results>.results-frame>.pages .page-number {
-    color: blue;
-    width: 40px;
+.results>.results-frame>.pages>table td {
+    width: 70px;
     text-align: center;
-    cursor: pointer;
 }
 
-.results>.results-frame>.pages .page-number:hover {
+.results>.results-frame>.pages button {
+    background-color: transparent;
+    border: none;
+}
+
+.results>.results-frame>.pages button:hover {
     text-decoration: underline;
 }
 
-.results>.results-frame>.pages>table .page-active {
-    color: black;
+.results>.results-frame>.pages>table .currentPage {
+    color: blue;
     font-weight: bold;
 }
 

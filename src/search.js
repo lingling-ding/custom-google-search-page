@@ -6,23 +6,22 @@ export default class Search {
     constructor() {
         this.google_api = new GoogleApi()
         this.results = []
+        this.nextPageInfo = []
+        this.previousPageInfo = []
         this.page = 1;
         this.startIndex = 1;
-        // this.maxPage = 1;
     }
-
-    // changePage(pageNumber) {
-    //     this.page = pageNumber;
-    //     const render = new Render(this)
-    //     render.renderResults()
-    // }
 
     makeRequest() {
         this.google_api.getData(this.page).then(data => {
             if (data['searchInformation']['totalResults'] > 0) {
                 this.results = data['items']
+                this.nextPageInfo = data['queries']['nextPage']
+                this.previousPageInfo = data['queries']['previousPage']
             } else {
                 this.results = []
+                this.nextPageInfo = []
+                this.previousPageInfo = []
             }
             const render = new Render(this)
             render.renderResults()
@@ -45,6 +44,7 @@ export default class Search {
         submitButton.addEventListener('click', function () {
             self.google_api.query = document.getElementById('search-bar').value
             // resolving promise
+            self.page = 1
             self.makeRequest()
         })
     }
