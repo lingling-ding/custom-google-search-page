@@ -1,4 +1,4 @@
-const API_KEY = 'AIzaSyBE9iK8wEjqPD1q0lU0jnG8q8Ktfb0IOjU'
+const API_KEY = 'AIzaSyAlZe0zA-iqIrHzB6djXiKKAm9n9Pvuz6U'
 const ENDPOINT = 'https://www.googleapis.com/customsearch/v1'
 const SEARCH_ENGINE_ID = '012989571078063497199:vtaqe4t4loc'
 
@@ -34,11 +34,16 @@ export default class GoogleApi {
                         resolve(json)
                     }
                     else {
-                        reject(xmlhttp.statusText)
+                        reject(xmlhttp)
                     }
                 }
             };
-            xmlhttp.open("GET", self.searchUrl(pageNumber), false);
+            // request couldn't be made at all
+            xmlhttp.onerror = function() { 
+                reject(xmlhttp)
+            };
+
+            xmlhttp.open("GET", self.searchUrl(pageNumber), true);
             xmlhttp.send();
         })
     }

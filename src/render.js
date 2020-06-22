@@ -1,3 +1,5 @@
+import ErrorMessage from './error_message'
+
 // controls HTML on index
 export default class Render {
     constructor(search) {
@@ -11,6 +13,15 @@ export default class Render {
 
     isPageActive(pageNumber) {
         return this.page == pageNumber
+    }
+
+    static renderError(xmlhttp) {
+        document.getElementById('results').style.display = 'none'
+        document.getElementById('no-results').style.display = 'none'
+        const error_message = new ErrorMessage(xmlhttp)
+        const error = document.getElementById('error')
+        error.style.display = 'block'
+        error.innerHTML = `<h2> ${error_message.message()} </h2>`
     }
 
     // click event on the page number
@@ -62,10 +73,18 @@ export default class Render {
         document.getElementById('image-results').innerHTML = renderImgResults
     }
 
+    static showSpinner() {
+        document.getElementById('loading').style.display = 'flex'
+    }
+
+
+    static hideSpinner() {
+        document.getElementById('loading').style.display = 'none'
+    }
+
     // render the text on the right side
     renderWebResults() {
         let webResults = ''
-        console.log(this.results)
         for (let index = 0; index < this.results.length; index++) {
             const result = this.results[index]
             if (result) {
@@ -87,6 +106,7 @@ export default class Render {
             document.getElementById('results').style.display = 'none'
             document.getElementById('no-results').style.display = 'block'
         }
+        document.getElementById('error').style.display = 'none'
     }
      
     renderResults() {

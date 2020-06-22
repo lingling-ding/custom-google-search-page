@@ -13,6 +13,7 @@ export default class Search {
     }
 
     makeRequest() {
+        Render.showSpinner();
         this.google_api.getData(this.page).then(data => {
             if (data['searchInformation']['totalResults'] > 0) {
                 this.results = data['items']
@@ -23,8 +24,12 @@ export default class Search {
                 this.nextPageInfo = []
                 this.previousPageInfo = []
             }
+            Render.hideSpinner();
             const render = new Render(this)
             render.renderResults()
+        }, error => {
+            Render.hideSpinner();
+            Render.renderError(error)
         })
     }
 

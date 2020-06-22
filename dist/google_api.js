@@ -16,7 +16,6 @@ var GoogleApi = function () {
     _createClass(GoogleApi, null, [{
         key: 'hello',
         value: function hello() {
-            console.log(' hello');
         }
     }]);
 
