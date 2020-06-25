@@ -1,4 +1,4 @@
-const API_KEY = 'AIzaSyBHtunlBtVyP-Kl9a_4kKUMlA1xLe8P_G8'
+const API_KEY = 'AIzaSyCZiYvB9lLG3lnzCCWHoFtM4yo7CaLLBeM'
 const ENDPOINT = 'https://www.googleapis.com/customsearch/v1'
 const SEARCH_ENGINE_ID = '012989571078063497199:vtaqe4t4loc'
 
@@ -14,8 +14,6 @@ export default class GoogleApi {
     }
 
     getData(pageNumber) {
-        // have to save "this" in to a variable beacause this not accessible within the call
-        const self = this;
         // ajax
         return new Promise((resolve, reject) => {
             if (window.XMLHttpRequest) {
@@ -38,12 +36,7 @@ export default class GoogleApi {
                     }
                 }
             }
-            // request couldn't be made at all
-            xmlHttp.onerror = () => { 
-                reject(xmlHttp)
-            }
-
-            xmlHttp.open("GET", self.searchUrl(pageNumber), true)
+            xmlHttp.open("GET", this.searchUrl(pageNumber), true)
             xmlHttp.send()
         })
     }

@@ -6,7 +6,6 @@ export default class Render {
         this.search = search
         this.page = search.page
         this.results = search.results
-        this.startIndex = search.startIndex
         this.nextPageInfo = search.nextPageInfo
         this.previousPageInfo = search.previousPageInfo
     }
@@ -23,18 +22,17 @@ export default class Render {
 
     // click event on the page number
     addEventListenerToPageList() {
-        const self = this
         const nextPage = document.getElementById('nextPage')
         const previousPage = document.getElementById('previousPage')
 
         if (nextPage) {
             nextPage.addEventListener('click', () => {
-                self.search.nextPage()
+                this.search.nextPage()
             })
         }
         if (previousPage) {
             previousPage.addEventListener('click', () => {
-                self.search.previousPage()
+                this.search.previousPage()
             })
         }
     }
